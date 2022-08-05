@@ -22,3 +22,8 @@ class PostCreate(generic.CreateView):
     fields = ['title', 'author', 'topic', 'content']
 
 
+class PostUpdate(generic.UpdateView):
+    model = Post
+    template_name = 'edit_post.html'
+    fields = ['title', 'topic', 'content']
+    

@@ -12,11 +12,11 @@ class PostList(generic.ListView):
 
 #class PostDetail(generic.DetailView):
     #model = Post
-    #template_name = 'post-detail.html'
+    #template_name = 'post_detail.html'
 
 
 def post_detail(request, slug):
-    template_name = 'post-detail.html'
+    template_name = 'post_detail.html'
     post = get_object_or_404(Post, slug=slug)
     comments = post.comments.filter(approved=True)
     new_comment = None
@@ -42,8 +42,10 @@ def post_detail(request, slug):
 
 class PostCreate(generic.CreateView):
     model = Post
-    fields = ['title', 'content']
+    template_name = 'add_post.html'
+    fields = ['title', 'author', 'topic', 'content']
 
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
+
+    #def form_valid(self, form):
+        #form.instance.author = self.request.user
+        #return super().form_valid(form)

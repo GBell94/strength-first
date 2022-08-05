@@ -17,7 +17,7 @@ TOPIC = (
 
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
-    slug = models.SlugField(max_length=200, unique=True)
+    #slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
     updated_on = models.DateTimeField(auto_now=True)
     topic = models.CharField(max_length=20, choices=TOPIC)
@@ -31,6 +31,9 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('home')    
 
     def number_of_likes(self):
         return self.likes.count()

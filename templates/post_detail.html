@@ -10,9 +10,13 @@
       <div class="card-body">
         <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
         <p class=" text-muted">{{ post.author }} | {{ post.created_on }}</p>
-        <a href="{% url 'update-post' post.pk %}">Edit</a>
-        <a href="{% url 'delete-post' post.pk %}">Delete</a>
         <p class="card-text ">{{ post.content | safe }}</p>
+        {% if user.is_authenticated %}
+          {% if post.author.id == user.id or user.is_superuser %}
+            <a href="{% url 'update-post' post.pk %}">Edit</a>
+            <a href="{% url 'delete-post' post.pk %}">Delete</a>
+          {% endif %}  
+        {% endif %}
         <a href="{% url 'home' %}" class="btn btn-primary">Back to posts list</a>
       </div>
     </div>

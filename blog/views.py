@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views import generic
-from .models import Post
+from .models import Post, Comment
 from django.urls import reverse_lazy
+#from .forms import CommentForm
 
 
 # Create your views here.
@@ -26,6 +27,7 @@ class PostCreate(generic.CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+
 class PostUpdate(generic.UpdateView):
     model = Post
     template_name = 'edit_post.html'
@@ -37,5 +39,18 @@ class PostDelete(generic.DeleteView):
     template_name = 'delete_post.html'
     success_url = reverse_lazy('home')
 
+
+class AddComment(generic.CreateView):
+    model = Comment
+    #form_class = CommentForm
+    fields = ['body']
+    template_name = 'add_comment.html'
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        form.instance.post_id = self.kwargs['pk']
+        form.instance.name = self.request.user.username
+        return super().form_valid(form)
+    
 
 

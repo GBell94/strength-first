@@ -46,6 +46,7 @@ class AddComment(generic.CreateView):
     fields = ['body']
     template_name = 'add_comment.html'
     success_url = reverse_lazy('home')
+    
 
     def form_valid(self, form):
         form.instance.post_id = self.kwargs['pk']

@@ -37,7 +37,10 @@
           <hr>
         </div>
         {% endfor %}
+        <strong><p> To add a comment, please <a href="{% url 'login' %}">login.</a></p></strong>
+        {% if user.is_authenticated %}
         <a href="{% url 'add-comment' post.pk %}" class="btn btn-primary">Add Comment</a>
+        {% endif %}
       </div>
     </div>
   </div>

@@ -20,8 +20,11 @@ class PostDetail(generic.DetailView):
 class PostCreate(generic.CreateView):
     model = Post
     template_name = 'add_post.html'
-    fields = ['title', 'author', 'topic', 'content']
+    fields = ['title', 'topic', 'content']
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 class PostUpdate(generic.UpdateView):
     model = Post

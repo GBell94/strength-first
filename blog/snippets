@@ -43,3 +43,94 @@ def post_detail(request, slug):
         #form = RegisterForm()
 
     #return render(response, "register.html", {"form": form})
+
+
+
+#class LikeView(View):
+
+    #def post(self, request, pk):
+        #post = get_object_or_404(Post, pk=pk)
+
+        #if post.likes.filter(id=request.user.id).exists():
+            #post.likes.remove(request.user)
+        #else:
+            #post.likes.add(request.user) 
+        #return HttpResponseRedirect('post-detail', args=[str(pk)]) 
+
+class AddLike(View):
+
+    def post(self, request, pk, *args, **kwargs):
+        post = Post.objects.get(pk=post-id)
+
+        is_like = False
+        for like in post.likes.all():
+            if like == request.user:
+                is_like = True
+                break
+        if not is_like: 
+            post.likes.add(request.user)
+        
+        if is_like:
+            post.likes.remove(request.user)
+    
+        
+        return HttpResponseRedirect(reverse('post-detail', args=[post-id])) 
+
+
+
+        def like_post(request):
+    user = request.user
+    if request.method == "POST":
+        post_id = request.POST.get('post-id')
+        post_obj = Post.objects.get(id=post_id)
+
+        if user in post_obj.liked.all():
+            post.obj.liked.remove(user)
+        else:
+            post_obj.liked.add(user)
+
+        like, create = like.objects.get_or_create(user=user, post_id=post_id)
+
+        if not created:
+            if like.value == 'Like':
+                like.value = 'Unlike'
+            else:
+                like.value = 'Like'
+        like.save()
+    return redirect('home') 
+
+
+    class LikeView(View):
+        #def get_success_url(self):
+        #return reverse("post-detail", kwargs={"pk": self.kwargs.get("pk")})
+
+    def get(self, request, *args, **kwargs):
+        like = Like()
+        like.post = get_object_or_404(Post, pk=self.kwargs.get("pk"))
+        like.user = self.request.user
+        like.save()
+        return redirect(self.get_success_url())
+
+
+ def like(request, post_id):
+        if request.method == "POST":
+            #make sure user can't like the post more than once. 
+            user = User.objects.get(username=request.user.username)
+            #find whatever post is associated with like
+            post = Post.objects.get(id=post_id)
+
+            newLike = Like(user=user, post=post)
+            newLike.alreadyLiked = True
+
+            post.likes += 1
+            post.save()
+            newLike.save()
+            return HttpResponseRedirect(reverse('home'))  
+
+def LikePostView(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    if request.user in post.likes.all():
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
+    return HttpResponseRedirect(reverse('post-detail', args=[pk])) 

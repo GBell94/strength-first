@@ -70,7 +70,7 @@
                     <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on }} </p>
                     <p class="card-text">{{post.content|slice:":200" }}</p>
                     <a href="{% url 'post-detail' post.pk  %}" class="btn btn-primary">Read More &rarr;</a>
-                    <p class="card-text text-muted h6"><i class="far fa-heart"></i>
+                    <p class="card-text text-muted h6"><i class="far fa-thumbs-up"></i>
                                 {{ post.number_of_likes }}</p>
                 </div>
             </div>

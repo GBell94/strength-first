@@ -1,14 +1,16 @@
-from django.shortcuts import render
-from django.views import generic
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy, reverse
+from django.views import generic, View
+from django.contrib.auth.models import User
 from .models import Post, Comment
-from django.urls import reverse_lazy
 #from .forms import CommentForm
 
 
 # Create your views here.
 class PostList(generic.ListView):
-    #queryset = Post.objects.filter(status=1).order_by('-created_on')
     model = Post
+    #queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'index.html'
     paginate_by = 5
 
@@ -47,11 +49,7 @@ class AddComment(generic.CreateView):
     template_name = 'add_comment.html'
     success_url = reverse_lazy('home')
     
-
     def form_valid(self, form):
         form.instance.post_id = self.kwargs['pk']
         form.instance.name = self.request.user.username
         return super().form_valid(form)
-    
-
-

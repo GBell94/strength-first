@@ -15,9 +15,10 @@ class PostList(generic.ListView):
     paginate_by = 5
 
 
-def CategoryView(request, topic):
-    category_posts = Post.objects.filter(topic='KB')
+def category_view(request):
+    category_posts = Post.objects.filter(topic ='KB')
     return render(request, 'categories.html', {'category_posts': category_posts})
+
 
 class PostDetail(generic.DetailView):
     model = Post

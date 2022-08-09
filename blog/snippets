@@ -143,4 +143,11 @@ def LikePostView(request, pk):
             <button type="submit" name="post-id" value="{{post.id}}"><i class="far fa-thumbs-up"></i></button>
             <span class="text-secondary">{{ post.number_of_likes }}</span>
           </form>
-        
+
+
+
+###
+def CategoryView(request):
+    category_posts = Post.objects.filter(topic='KB')
+    return render(request, 'categories.html', {'category_posts': category_posts})
+###

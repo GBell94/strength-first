@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.shortcuts import render
+#from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy, reverse
-from django.views import generic, View
-from django.contrib.auth.models import User
+from django.views import generic
+#from django.contrib.auth.models import User
 from .models import Post, Comment
 #from .forms import CommentForm
 
@@ -14,6 +14,10 @@ class PostList(generic.ListView):
     template_name = 'index.html'
     paginate_by = 5
 
+
+def CategoryView(request, topic):
+    category_posts = Post.objects.filter(topic='KB')
+    return render(request, 'categories.html', {'category_posts': category_posts})
 
 class PostDetail(generic.DetailView):
     model = Post

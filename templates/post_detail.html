@@ -19,14 +19,6 @@
         {% endif %}
         <a href="{% url 'home' %}" class="btn btn-primary">Back to posts list</a>
       </div>
-      
-        
-        <form action="{% url 'like_post' post.pk %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" name="post-id" value="{{post.id}}"><i class="far fa-thumbs-up"></i></button>
-            <span class="text-secondary">{{ post.number_of_likes }}</span>
-          </form>
-        
     </div>
     <div class="col-md-8 card mb-4  mt-3 ">
       <div class="card-body">

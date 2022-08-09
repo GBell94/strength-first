@@ -134,3 +134,13 @@ def LikePostView(request, pk):
     else:
         post.likes.add(request.user)
     return HttpResponseRedirect(reverse('post-detail', args=[pk])) 
+
+
+
+
+        <form action="{% url 'like_post' post.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" name="post-id" value="{{post.id}}"><i class="far fa-thumbs-up"></i></button>
+            <span class="text-secondary">{{ post.number_of_likes }}</span>
+          </form>
+        

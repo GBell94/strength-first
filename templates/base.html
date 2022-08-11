@@ -39,9 +39,9 @@
                             Topic
                           </a>
                           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{% url 'category' %}">Kettlebells</a></li>
-                            <li><a class="dropdown-item" href="#">Barbells</a></li>
-                            <li><a class="dropdown-item" href="#">Bodyweight</a></li>
+                            {% for item in cats %}
+                            <a class="dropdown-item" href="{% url 'category' item %}">{{ item }}</a>
+                           {% endfor %}
                           </ul>
                         </li>
                         {% if user.is_authenticated %}

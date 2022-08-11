@@ -151,3 +151,9 @@ def CategoryView(request):
     category_posts = Post.objects.filter(topic='KB')
     return render(request, 'categories.html', {'category_posts': category_posts})
 ###
+
+
+<!--
+                          <li><a class="dropdown-item" href="{% url 'category' %}">Kettlebells</a></li>
+                            <li><a class="dropdown-item" href="{% url 'category' %}">Barbells</a></li>
+                            <li><a class="dropdown-item" href="#">Bodyweight</a></li>-->

@@ -14,9 +14,21 @@ class PostList(generic.ListView):
     template_name = 'index.html'
     paginate_by = 5
 
+    
+cats = ('KB', 'BB', 'BW')
+
+def CategoryView(request, cats):
+	    category_posts = Post.objects.filter(category=cats)
+	    return render(request, 'categories.html', {'cats': cats, 'category_posts':category_posts})
+       
+
+#def category_view(request):
+    #category_posts = Post.objects.filter(topic='KB')
+    #return render(request, 'categories.html', {'category_posts': category_posts})
+
 
 def category_view(request):
-    category_posts = Post.objects.filter(topic ='KB')
+    category_posts = Post.objects.filter(topic='KB')
     return render(request, 'categories.html', {'category_posts': category_posts})
 
 
